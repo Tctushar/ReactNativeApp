@@ -1,4 +1,4 @@
-import React from "react-native";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,21 +6,21 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  TextInput,
+  Button,
 } from "react-native";
-const handleSearch = () => {
-  // search logic here
+const handlePress = () => {
+  console.log("Clicked");
 };
-
 const Header = () => {
+  const [searchText, setSearchText] = useState("");
   return (
     <View style={{ flex: 1, marginTop: 60 }}>
-      {/* Original Header with Text Links */}
       <View style={styles.header}>
         <Text style={styles.title}>
           <Text style={styles.food}>Food</Text>
           <Text style={styles.zone}>Zone</Text>
         </Text>
-        {/* Search Button */}
 
         <View style={styles.linksContainer}>
           <TouchableOpacity>
@@ -31,11 +31,19 @@ const Header = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-        <Text style={styles.searchText}>Search your craving here...</Text>
+
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search your craving here..."
+        placeholderTextColor="white"
+        value={searchText}
+        onChangeText={setSearchText}
+      />
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Text style={styles.buttonText}>Press Me</Text>
       </TouchableOpacity>
       <Text style={styles.foodAbove}></Text>
-      {/* Image Slider Section */}
+
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -76,23 +84,21 @@ const styles = StyleSheet.create({
     marginTop: 35,
     width: "100%",
   },
-
-  searchButton: {
-    backgroundColor: "black",
-    width: "90%",
-    color: "blue",
-    border: "none",
-    padding: 10,
+  searchInput: {
+    color: "black",
+    width: "70%",
     marginLeft: "auto",
     marginRight: "auto",
-    borderRadius: 13,
+    padding: 5,
+    borderRadius: 7,
+    borderWidth: 1,
   },
 
   searchText: {
     color: "white",
     textAlign: "center",
-    borderBlockColor: "yellow",
     fontSize: 14,
+    fontStyle: "italic",
   },
   header: {
     flexDirection: "row",
@@ -127,16 +133,19 @@ const styles = StyleSheet.create({
   slider: {
     height: "auto",
   },
+  buttonText: {
+    textAlign: "center",
+    backgroundColor: "orange",
+    padding: 7,
+    width: "30%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: 10,
+    borderRadius: 10,
+  },
   image: {
     width: 400,
-    // height: 300,
-    // marginRight: 16,
-    // borderRadius: 10,
-    // resizeMode:'cover'
-    // // justifyContent:'space-evenly'
     flex: 1,
-    // width: '100%',
-    // height: '100%',
     resizeMode: "contain",
     alignSelf: "center",
     marginLeft: "auto",
