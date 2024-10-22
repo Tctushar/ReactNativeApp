@@ -47,7 +47,6 @@ const FoodEve = () => {
         value={query}
         onChangeText={(text) => setQuery(text)}
       />
-      {/* <Button title="Search" style={styles.buttonText} onPress={fetchRecipes} /> */}
       <TouchableOpacity style={styles.button} onPress={fetchRecipes}>
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
