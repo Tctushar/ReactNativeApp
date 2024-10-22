@@ -8,15 +8,23 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
+  FlatList,
 } from "react-native";
-const handlePress = () => {
-  console.log("Clicked");
-};
-const Header = () => {
-  const [searchText, setSearchText] = useState("");
+const FoodEve = () => {
+  const [query, setQuery] = useState("");
+  const [recipes, setRecipes] = useState([]);
+  const fetchRecipes = async () => {
+    const appId = "6b2b2d48";
+    const appKey = "1dc0b0eb525744c067a2043e0b5696bc";
+    const response = await fetch(
+      `https://api.edamam.com/search?q=${query}&app_id=${appId}&app_key=${appKey}`
+    );
+    const data = await response.json();
+    setRecipes(data.hits);
+  };
   return (
-    <View style={{ flex: 1, marginTop: 60 }}>
-      <View style={styles.header}>
+    <View style={{ backgroundColor: "white", flex: 1, marginTop: 60 }}>
+      <View style={styles.FoodEve}>
         <Text style={styles.title}>
           <Text style={styles.food}>Food</Text>
           <Text style={styles.zone}>Zone</Text>
@@ -36,15 +44,26 @@ const Header = () => {
         style={styles.searchInput}
         placeholder="Search your craving here..."
         placeholderTextColor="white"
-        value={searchText}
-        onChangeText={setSearchText}
+        value={query}
+        onChangeText={(text) => setQuery(text)}
       />
-      <TouchableOpacity style={styles.button} onPress={handlePress}>
-        <Text style={styles.buttonText}>Press Me</Text>
+      {/* <Button title="Search" style={styles.buttonText} onPress={fetchRecipes} /> */}
+      <TouchableOpacity style={styles.button} onPress={fetchRecipes}>
+        <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
-      <Text style={styles.foodAbove}></Text>
+      <FlatList
+        data={recipes}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.recipe}>
+            <Text style={styles.recipeTitle}>{item.recipe.label}</Text>
+            <Image source={{ uri: item.recipe.image }} style={styles.image} />
+            <Text>Calories: {Math.round(item.recipe.calories)}</Text>
+          </View>
+        )}
+      />
 
-      <ScrollView
+      {/* <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         pagingEnabled
@@ -74,7 +93,7 @@ const Header = () => {
             style={styles.image}
           />
         </TouchableOpacity>
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 };
@@ -83,6 +102,20 @@ const styles = StyleSheet.create({
   headerContainer: {
     marginTop: 35,
     width: "100%",
+  },
+ 
+  buttonText: {
+    fontSize: 16,
+    textAlign: "center",
+    backgroundColor: "blue",
+    padding: 8,
+    backgroundColor: "orange",
+    width: "30%",
+    borderRadius: 8,
+    alignItems: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: 12,
   },
   searchInput: {
     color: "black",
@@ -100,7 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontStyle: "italic",
   },
-  header: {
+  FoodEve: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -133,18 +166,10 @@ const styles = StyleSheet.create({
   slider: {
     height: "auto",
   },
-  buttonText: {
-    textAlign: "center",
-    backgroundColor: "orange",
-    padding: 7,
-    width: "30%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 10,
-    borderRadius: 10,
-  },
+
   image: {
-    width: 400,
+    width: 100,
+    height: 100,
     flex: 1,
     resizeMode: "contain",
     alignSelf: "center",
@@ -153,4 +178,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default FoodEve;
