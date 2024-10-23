@@ -21,6 +21,7 @@ const FoodEve = () => {
     );
     const data = await response.json();
     setRecipes(data.hits);
+    console.log("Added data", hits);
   };
   return (
     <View style={{ backgroundColor: "white", flex: 1, marginTop: 60 }}>
@@ -50,10 +51,12 @@ const FoodEve = () => {
       <TouchableOpacity style={styles.button} onPress={fetchRecipes}>
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
-      <FlatList
-        data={recipes}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
+      <FlatList //unique key for each item
+        data={recipes} //Providing set of data
+        keyExtractor={(item, index) => index.toString()} //key to string
+        renderItem={(
+          { item } ////render data
+        ) => (
           <View style={styles.recipe}>
             <Text style={styles.recipeTitle}>{item.recipe.label}</Text>
             <Image source={{ uri: item.recipe.image }} style={styles.image} />
@@ -61,38 +64,6 @@ const FoodEve = () => {
           </View>
         )}
       />
-
-      {/* <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        style={styles.slider}
-      >
-        <TouchableOpacity>
-          <Image
-            source={{
-              uri: "https://img.freepik.com/free-photo/fruit-salad-spilling-floor-was-mess-vibrant-colors-textures-generative-ai_8829-2895.jpg?t=st=1729082334~exp=1729085934~hmac=ad56aa96f713db051d9b7052c6b586322ebc1dc901695e1acaabe1f587f80bab&w=740",
-            }} // Replace with your image URL
-            style={styles.image}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image
-            source={{
-              uri: "https://www.foodiesfeed.com/wp-content/uploads/2023/04/strawberry-milk-splash.jpg",
-            }} // Replace with your image URL
-            style={styles.image}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image
-            source={{
-              uri: "https://www.foodiesfeed.com/wp-content/uploads/2023/06/ice-cream-cone-splash.jpg",
-            }} // Replace with your image URL
-            style={styles.image}
-          />
-        </TouchableOpacity>
-      </ScrollView> */}
     </View>
   );
 };
@@ -102,7 +73,7 @@ const styles = StyleSheet.create({
     marginTop: 35,
     width: "100%",
   },
- 
+
   buttonText: {
     fontSize: 16,
     textAlign: "center",
