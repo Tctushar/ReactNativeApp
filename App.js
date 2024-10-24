@@ -21,7 +21,6 @@ const FoodEve = () => {
     );
     const data = await response.json();
     setRecipes(data.hits);
-    console.log("Added data", hits);
   };
   return (
     <View style={{ backgroundColor: "white", flex: 1, marginTop: 60 }}>
@@ -43,7 +42,7 @@ const FoodEve = () => {
 
       <TextInput
         style={styles.searchInput}
-        placeholder="Search your craving here..."
+        placeholder="Search Items..."
         placeholderTextColor="white"
         value={query}
         onChangeText={(text) => setQuery(text)}
@@ -57,10 +56,12 @@ const FoodEve = () => {
         renderItem={(
           { item } ////render data
         ) => (
-          <View style={styles.recipe}>
+          <View style={styles.recipee}>
             <Text style={styles.recipeTitle}>{item.recipe.label}</Text>
             <Image source={{ uri: item.recipe.image }} style={styles.image} />
-            <Text>Calories: {Math.round(item.recipe.calories)}</Text>
+            <Text style={styles.calorie}>
+              Calories: {Math.round(item.recipe.calories)}
+            </Text>
           </View>
         )}
       />
@@ -87,16 +88,29 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     marginTop: 12,
   },
+  calorie: {
+    textAlign: "center",
+    color: "#bf4bac",
+  },
   searchInput: {
-    color: "black",
+    color: "white",
     width: "70%",
     marginLeft: "auto",
     marginRight: "auto",
-    padding: 5,
+    padding: 7,
     borderRadius: 7,
     borderWidth: 1,
+    backgroundColor: "black",
   },
-
+  recipee: {
+    // display: "flex",
+  },
+  recipeTitle: {
+    textAlign: "center",
+    marginTop: 11,
+    marginBottom: 5,
+    color: "#e89f20",
+  },
   searchText: {
     color: "white",
     textAlign: "center",
