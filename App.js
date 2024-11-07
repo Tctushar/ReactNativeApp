@@ -3,11 +3,9 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   Image,
   TouchableOpacity,
   TextInput,
-  Button,
   FlatList,
 } from "react-native";
 const FoodEve = () => {
@@ -20,10 +18,10 @@ const FoodEve = () => {
       `https://api.edamam.com/search?q=${query}&app_id=${appId}&app_key=${appKey}`
     );
     const data = await response.json();
-    setRecipes(data.hits);
+    setRecipes(data.hits); //hits array of recipe results returned
   };
   return (
-    <View style={{ backgroundColor: "white", flex: 1, marginTop: 60 }}>
+    <View style={{ backgroundColor: "white", marginTop: 60 }}>
       <View style={styles.FoodEve}>
         <Text style={styles.title}>
           <Text style={styles.food}>Food</Text>
@@ -50,11 +48,12 @@ const FoodEve = () => {
       <TouchableOpacity style={styles.button} onPress={fetchRecipes}>
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
+      <View style={styles.containers}>
       <FlatList //unique key for each item
         data={recipes} //Providing set of data
         keyExtractor={(item, index) => index.toString()} //key to string
         renderItem={(
-          { item } ////render data
+          { item } //render data
         ) => (
           <View style={styles.recipee}>
             <Text style={styles.recipeTitle}>{item.recipe.label}</Text>
@@ -65,6 +64,7 @@ const FoodEve = () => {
           </View>
         )}
       />
+      </View>
     </View>
   );
 };
@@ -88,6 +88,16 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     marginTop: 12,
   },
+  containers:{
+    borderColor:'grey',
+    borderWidth:3,
+    height:500,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+
+   
+  },
   calorie: {
     textAlign: "center",
     color: "#bf4bac",
@@ -102,9 +112,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: "black",
   },
-  recipee: {
-    // display: "flex",
-  },
   recipeTitle: {
     textAlign: "center",
     marginTop: 11,
@@ -117,6 +124,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontStyle: "italic",
   },
+
   FoodEve: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -154,7 +162,7 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    flex: 1,
+
     resizeMode: "contain",
     alignSelf: "center",
     marginLeft: "auto",
