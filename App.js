@@ -18,10 +18,10 @@ const FoodEve = () => {
       `https://api.edamam.com/search?q=${query}&app_id=${appId}&app_key=${appKey}`
     );
     const data = await response.json();
-    setRecipes(data.hits); //hits array of recipe results returned
+    setRecipes(data.hits);
   };
   return (
-    <View style={{ backgroundColor: "white", marginTop: 60 }}>
+    <View style={styles.mainContainer}>
       <View style={styles.FoodEve}>
         <Text style={styles.title}>
           <Text style={styles.food}>Food</Text>
@@ -49,21 +49,30 @@ const FoodEve = () => {
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
       <View style={styles.containers}>
-      <FlatList //unique key for each item
-        data={recipes} //Providing set of data
-        keyExtractor={(item, index) => index.toString()} //key to string
-        renderItem={(
-          { item } //render data
-        ) => (
-          <View style={styles.recipee}>
-            <Text style={styles.recipeTitle}>{item.recipe.label}</Text>
-            <Image source={{ uri: item.recipe.image }} style={styles.image} />
-            <Text style={styles.calorie}>
-              Calories: {Math.round(item.recipe.calories)}
-            </Text>
-          </View>
-        )}
-      />
+        <FlatList //unique key for each item
+          data={recipes} //Providing set of data
+          keyExtractor={(item, index) => index.toString()} //key to string
+          renderItem={(
+            { item } //render data
+          ) => (
+            <View style={styles.recipee}>
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: "orange",
+                  width: 100,
+                  marginBottom: 5,
+                }}
+              >
+                {item.recipe.label}
+              </Text>
+              <Image source={{ uri: item.recipe.image }} style={styles.image} />
+              <Text style={styles.calorie}>
+                Calories: {Math.round(item.recipe.calories)}
+              </Text>
+            </View>
+          )}
+        />
       </View>
     </View>
   );
@@ -71,36 +80,42 @@ const FoodEve = () => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    marginTop: 35,
     width: "100%",
   },
-
+  mainContainer: {
+    marginTop: 60,
+    width: "100%",
+  },
   buttonText: {
     fontSize: 16,
     textAlign: "center",
     backgroundColor: "blue",
     padding: 8,
     backgroundColor: "orange",
-    width: "30%",
+    width: "20%",
     borderRadius: 8,
     alignItems: "center",
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: 12,
   },
-  containers:{
-    borderColor:'grey',
-    borderWidth:3,
-    height:500,
-    flexDirection: "row",
+  containers: {
+    backgroundColor: "#f5f5f5",
     flexWrap: "wrap",
-    alignItems: "center",
-
-   
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    borderWidth: 3,
+    borderBlockColor: "green",
+    flexDirection: "row",
+    height: 500,
+  },
+  recipeTitle: {
+    fontSize: 15,
   },
   calorie: {
-    textAlign: "center",
     color: "#bf4bac",
+    fontSize: 10,
+    marginBottom: 12,
   },
   searchInput: {
     color: "white",
@@ -113,7 +128,6 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
   recipeTitle: {
-    textAlign: "center",
     marginTop: 11,
     marginBottom: 5,
     color: "#e89f20",
@@ -158,15 +172,11 @@ const styles = StyleSheet.create({
   slider: {
     height: "auto",
   },
-
   image: {
-    width: 100,
+    width: "30%",
+    margin: 4,
     height: 100,
-
-    resizeMode: "contain",
-    alignSelf: "center",
-    marginLeft: "auto",
-    marginRight: "auto",
+    backgroundColor: "lightblue",
   },
 });
 
