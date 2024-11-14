@@ -79,12 +79,10 @@ const FoodEve = () => {
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    width: "100%",
-  },
   mainContainer: {
     marginTop: 60,
     width: "100%",
+    flex:1,
   },
   buttonText: {
     fontSize: 16,
@@ -100,14 +98,10 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   containers: {
-    backgroundColor: "#f5f5f5",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    borderWidth: 3,
-    borderBlockColor: "green",
-    flexDirection: "row",
     height: 500,
+    padding: 10,
+ 
+  
   },
   recipeTitle: {
     fontSize: 15,
@@ -126,6 +120,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     borderWidth: 1,
     backgroundColor: "black",
+
   },
   recipeTitle: {
     marginTop: 11,
@@ -138,7 +133,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontStyle: "italic",
   },
-
   FoodEve: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -173,7 +167,7 @@ const styles = StyleSheet.create({
     height: "auto",
   },
   image: {
-    width: "30%",
+    width: 100,
     margin: 4,
     height: 100,
     backgroundColor: "lightblue",
