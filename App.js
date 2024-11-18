@@ -8,34 +8,21 @@ import {
   TextInput,
   FlatList,
 } from "react-native";
+import Header from "./component/header";
+import { API_KEYS } from "./config";
 const FoodEve = () => {
-  const [query, setQuery] = useState("");
-  const [recipes, setRecipes] = useState([]);
+  const [query, setQuery] = useState(""); //query for user's input
+  const [recipes, setRecipes] = useState([]); //Storing fetched search results
   const fetchRecipes = async () => {
-    const appId = "6b2b2d48";
-    const appKey = "1dc0b0eb525744c067a2043e0b5696bc";
     const response = await fetch(
-      `https://api.edamam.com/search?q=${query}&app_id=${appId}&app_key=${appKey}`
+      `https://api.edamam.com/search?q=${query}&app_id=${API_KEYS.appId}&app_key=${API_KEYS.appKey}`
     );
     const data = await response.json();
     setRecipes(data.hits);
   };
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.FoodEve}>
-        <Text style={styles.title}>
-          <Text style={styles.food}>Food</Text>
-          <Text style={styles.zone}>Zone</Text>
-        </Text>
-        <View style={styles.linksContainer}>
-          <TouchableOpacity>
-            <Text style={styles.link}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.link}>About</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      <Header />
       <TextInput
         style={styles.searchInput}
         placeholder="Search Items..."
@@ -111,13 +98,13 @@ const FoodEve = () => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    marginTop: 30,
+    marginTop: 60,
     width: "100%",
     flexDirection: "column",
   },
   details: {
     color: "#c47e89",
-    marginBottom:10,
+    marginBottom: 10,
   },
   buttonText: {
     fontSize: 16,
@@ -148,9 +135,9 @@ const styles = StyleSheet.create({
     borderBottomColor: "#f5f5f5",
   },
   textContainer: {
-    flex: 1,  
-    justifyContent: "center",  
-    paddingLeft: 10, 
+    flex: 1,
+    justifyContent: "center",
+    paddingLeft: 10,
   },
   recipeTitle: {
     fontSize: 17,
@@ -183,43 +170,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontStyle: "italic",
   },
-  FoodEve: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 16,
-    padding: 10,
-    backgroundColor: "black",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
+
   foodAbove: {
     textAlign: "center",
     color: "white",
   },
-  linksContainer: {
-    flexDirection: "row",
-  },
-  food: {
-    color: "orange",
-  },
-  zone: {
-    color: "white",
-  },
-  link: {
-    color: "white",
-    fontSize: 18,
-    marginLeft: 16,
-  },
-
   image: {
     width: 150,
-    borderRadius:5,
+    borderRadius: 5,
     height: 150,
     objectFit: "contain",
-    margin:10,
+    margin: 10,
   },
 });
 
