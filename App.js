@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import Header from "./component/header";
 import { API_KEYS } from "./config";
+import NewsSlider from "./component/slider";
+
 const FoodEve = () => {
   const [query, setQuery] = useState(""); //query for user's input
   const [recipes, setRecipes] = useState([]); //Storing fetched search results
@@ -23,6 +25,7 @@ const FoodEve = () => {
   return (
     <View style={styles.mainContainer}>
       <Header />
+
       <TextInput
         style={styles.searchInput}
         placeholder="Search Items..."
@@ -92,6 +95,7 @@ const FoodEve = () => {
           )}
         />
       </View>
+      <NewsSlider/>
     </View>
   );
 };
