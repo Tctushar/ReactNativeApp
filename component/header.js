@@ -11,7 +11,7 @@ export default function Header() {
         <TouchableOpacity>
           <Text style={styles.link}></Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("About")}> {/* Navigate to About */}
           <Text style={styles.link}>About</Text>
         </TouchableOpacity>
       </View>

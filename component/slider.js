@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, FlatList, Dimensions, TouchableOpacity, Linking } from "react-native";
- 
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  FlatList,
+  Dimensions,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 const { width } = Dimensions.get("window");
-
 const NewsSlider = () => {
   const [news, setNews] = useState([]);
-
   useEffect(() => {
     const fetchNews = async () => {
       try {
         const response = await fetch(
-          'https://tasty.p.rapidapi.com/recipes/list?from=0&size=10&q=food'
+          "https://www.themealdb.com/api/json/v1/1/search.php?s="
         );
         const data = await response.json();
-        setNews(data.articles);
+        console.log(data); // Debug
+        setNews(data.meals || []);
       } catch (error) {
         console.error("Error fetching news:", error);
       }
@@ -23,38 +30,37 @@ const NewsSlider = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.slide}>
-      {item.urlToImage && (
-        <Image source={{ uri: item.urlToImage }} style={styles.image} />
+      {item.strMealThumb && (
+        <Image source={{ uri: item.strMealThumb }} style={styles.image} />
       )}
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.description}>{item.description}</Text>
-      <TouchableOpacity onPress={() => Linking.openURL(item.url)}>
-        <Text style={styles.link}>Read More</Text>
+      <Text style={styles.title}>{item.strMeal}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          Linking.openURL(`https://www.themealdb.com/meal/${item.idMeal}`);
+        }}
+      >
+        <Text style={styles.link}>View Recipe</Text>
       </TouchableOpacity>
     </View>
   );
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={news}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-      />
-    </View>
+    <FlatList
+      data={news}
+      renderItem={renderItem}
+      keyExtractor={(item, index) => index.toString()}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      pagingEnabled
+      style={styles.slider}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 20,
+  slider: {
+    marginTop: 20,
+    height: 250,
   },
   slide: {
     width: width * 0.8,
@@ -67,24 +73,19 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 200,
+    height: 150,
     borderRadius: 10,
   },
   title: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#eb6613",
     marginVertical: 10,
     textAlign: "center",
   },
-  description: {
-    fontSize: 14,
-    color: "#555",
-    textAlign: "center",
-    marginBottom: 10,
-  },
   link: {
     fontSize: 16,
-    color: "#007BFF",
+    color: "#cc2557",
     textDecorationLine: "underline",
   },
 });

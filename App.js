@@ -11,6 +11,7 @@ import {
 import Header from "./component/header";
 import { API_KEYS } from "./config";
 import NewsSlider from "./component/slider";
+import About from "./component/about";
 
 const FoodEve = () => {
   const [query, setQuery] = useState(""); //query for user's input
@@ -24,8 +25,7 @@ const FoodEve = () => {
   };
   return (
     <View style={styles.mainContainer}>
-      <Header />
-
+      <View>   <Header /></View>
       <TextInput
         style={styles.searchInput}
         placeholder="Search Items..."
@@ -33,9 +33,11 @@ const FoodEve = () => {
         value={query}
         onChangeText={(text) => setQuery(text)}
       />
+   
       <TouchableOpacity style={styles.button} onPress={fetchRecipes}>
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
+
       <View style={styles.containers}>
         <FlatList //unique key for each item
           data={recipes} //Providing set of data
@@ -95,7 +97,10 @@ const FoodEve = () => {
           )}
         />
       </View>
-      <NewsSlider/>
+      <View style={{ marginVertical: 20 }}>
+        {/* <NewsSlider /> */}
+        <About />
+      </View>
     </View>
   );
 };
