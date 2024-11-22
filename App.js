@@ -25,7 +25,10 @@ const FoodEve = () => {
   };
   return (
     <View style={styles.mainContainer}>
-      <View>   <Header /></View>
+      <View>
+        {""}
+        <Header />
+      </View>
       <TextInput
         style={styles.searchInput}
         placeholder="Search Items..."
@@ -33,7 +36,7 @@ const FoodEve = () => {
         value={query}
         onChangeText={(text) => setQuery(text)}
       />
-   
+
       <TouchableOpacity style={styles.button} onPress={fetchRecipes}>
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
@@ -55,9 +58,8 @@ const FoodEve = () => {
                     color: "#c75d0c",
                   }}
                 >
-                  {" "}
-                  Details:
-                </Text>
+                  {""}
+                  Details:</Text>
                 <Text
                   style={{
                     fontSize: 17,
@@ -66,9 +68,7 @@ const FoodEve = () => {
                     marginBottom: 5,
                     textAlign: "center",
                   }}
-                >
-                  Name: {item.recipe.label}
-                </Text>
+                > Name: {item.recipe.label} </Text>
 
                 <Text style={styles.calorie}>
                   Calories: {Math.round(item.recipe.calories)}
@@ -80,14 +80,12 @@ const FoodEve = () => {
                     fontSize: 15,
                     margin: 1,
                   }}
-                >
-                  Ingredients:
-                </Text>
+                >Ingredients:</Text>
                 <Text style={styles.details}>
                   {item.recipe.ingredientLines.join(", ")}
                 </Text>
                 <Text style={styles.details}>
-                  Total Time:{" "}
+                  Total Time:{""}
                   {item.recipe.totalTime
                     ? `${item.recipe.totalTime} minutes`
                     : "N/A"}
@@ -98,8 +96,8 @@ const FoodEve = () => {
         />
       </View>
       <View style={{ marginVertical: 20 }}>
-        {/* <NewsSlider /> */}
-        <About />
+        <NewsSlider />
+        {/* <About /> */}
       </View>
     </View>
   );
