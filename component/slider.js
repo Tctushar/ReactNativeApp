@@ -19,9 +19,8 @@ const NewsSlider = () => {
           "https://www.themealdb.com/api/json/v1/1/search.php?s="
         );
         const data = await response.json();
-        console.log(data); // Debug
         setNews(data.meals || []);
-      } catch (error) {
+      }catch (error) {
         console.error("Error fetching news:", error);
       }
     };

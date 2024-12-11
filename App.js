@@ -14,8 +14,8 @@ import NewsSlider from "./component/slider";
 import About from "./component/about";
 
 const FoodEve = () => {
-  const [query, setQuery] = useState(""); //query for user's input
-  const [recipes, setRecipes] = useState([]); //Storing fetched search results
+  const [query, setQuery] = useState("");  
+  const [recipes, setRecipes] = useState([]);  
   const fetchRecipes = async () => {
     const response = await fetch(
       `https://api.edamam.com/search?q=${query}&app_id=${API_KEYS.appId}&app_key=${API_KEYS.appKey}`
@@ -42,11 +42,11 @@ const FoodEve = () => {
       </TouchableOpacity>
 
       <View style={styles.containers}>
-        <FlatList //unique key for each item
-          data={recipes} //Providing set of data
-          keyExtractor={(item, index) => index.toString()} //key to string
+        <FlatList 
+          data={recipes}  
+          keyExtractor={(item, index) => index.toString()}  
           renderItem={(
-            { item } //render data
+            { item }  
           ) => (
             <View style={styles.recipee}>
               <Image source={{ uri: item.recipe.image }} style={styles.image} />
@@ -59,7 +59,8 @@ const FoodEve = () => {
                   }}
                 >
                   {""}
-                  Details:</Text>
+                  Details:
+                </Text>
                 <Text
                   style={{
                     fontSize: 17,
@@ -68,7 +69,10 @@ const FoodEve = () => {
                     marginBottom: 5,
                     textAlign: "center",
                   }}
-                > Name: {item.recipe.label} </Text>
+                >
+                  {" "}
+                  Name: {item.recipe.label}{" "}
+                </Text>
 
                 <Text style={styles.calorie}>
                   Calories: {Math.round(item.recipe.calories)}
@@ -80,7 +84,9 @@ const FoodEve = () => {
                     fontSize: 15,
                     margin: 1,
                   }}
-                >Ingredients:</Text>
+                >
+                  Ingredients:
+                </Text>
                 <Text style={styles.details}>
                   {item.recipe.ingredientLines.join(", ")}
                 </Text>
@@ -95,10 +101,8 @@ const FoodEve = () => {
           )}
         />
       </View>
-      <View style={{ marginVertical: 20 }}>
-        <NewsSlider />
-        {/* <About /> */}
-      </View>
+      <View style={{ marginVertical: 20 }}>{/* <About /> */}</View>
+      <NewsSlider />
     </View>
   );
 };

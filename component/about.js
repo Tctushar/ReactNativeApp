@@ -1,3 +1,5 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -7,14 +9,21 @@ import {
   ImageBackground,
 } from "react-native";
 const { width } = Dimensions.get("window");
+const Stack = createStackNavigator();
 const About = () => {
   const imageUrl =
     "https://img.freepik.com/free-photo/fruit-salad-spilling-floor-was-mess-vibrant-colors-textures-generative-ai_8829-2895.jpg";
   return (
     <View style={styles.About}>
-      <View>
+      {/* <View>
         <Text style={styles.heading}>About</Text>
-      </View>
+      </View> */}
+      <NavigationContainer>
+      <Stack.Navigator initialRouteName="About">
+        <Stack.Screen name="Home" component={About} />
+        {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
 
       <ImageBackground
         source={{ uri: imageUrl }}
