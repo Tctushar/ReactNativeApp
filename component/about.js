@@ -1,6 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -8,48 +6,40 @@ import {
   Dimensions,
   ImageBackground,
 } from "react-native";
+
 const { width } = Dimensions.get("window");
-const Stack = createStackNavigator();
+
 const About = () => {
   const imageUrl =
     "https://img.freepik.com/free-photo/fruit-salad-spilling-floor-was-mess-vibrant-colors-textures-generative-ai_8829-2895.jpg";
   return (
-    <View style={styles.About}>
-      {/* <View>
-        <Text style={styles.heading}>About</Text>
-      </View> */}
-      <NavigationContainer>
-      <Stack.Navigator initialRouteName="About">
-        <Stack.Screen name="Home" component={About} />
-        {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
-      </Stack.Navigator>
-    </NavigationContainer>
-
+    <View style={styles.container}>
       <ImageBackground
         source={{ uri: imageUrl }}
         resizeMode="cover"
-        style={styles.images}
+        style={styles.image}
       >
-        <Text style={styles.text}>Inside</Text>
+        <Text style={styles.text}>Inside About Page</Text>
       </ImageBackground>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  heading: {
-    color: "black",
-    marginTop: 90,
-    fontSize: 15,
-    textAlign: "center",
-    backgroundColor: "black",
-    padding: 10,
-    color: "white",
-    marginBottom: 3,
+  container: {
+    flex: 1,
   },
-  images: {
-    width: "auto",
-    height: 600,
+  image: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    padding: 10,
+    borderRadius: 5,
   },
 });
 

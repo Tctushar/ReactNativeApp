@@ -11,11 +11,9 @@ import {
 import Header from "./component/header";
 import { API_KEYS } from "./config";
 import NewsSlider from "./component/slider";
-import About from "./component/about";
-
-const FoodEve = () => {
-  const [query, setQuery] = useState("");  
-  const [recipes, setRecipes] = useState([]);  
+const FoodEve = (navigation) => {
+  const [query, setQuery] = useState("");
+  const [recipes, setRecipes] = useState([]);
   const fetchRecipes = async () => {
     const response = await fetch(
       `https://api.edamam.com/search?q=${query}&app_id=${API_KEYS.appId}&app_key=${API_KEYS.appKey}`
@@ -34,20 +32,17 @@ const FoodEve = () => {
         placeholder="Search Items..."
         placeholderTextColor="white"
         value={query}
-        onChangeText={(text) => setQuery(text)}
+        onChangeText={(text) => setQuery(text)}scrollEnabled
       />
-
       <TouchableOpacity style={styles.button} onPress={fetchRecipes}>
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
 
       <View style={styles.containers}>
-        <FlatList 
-          data={recipes}  
-          keyExtractor={(item, index) => index.toString()}  
-          renderItem={(
-            { item }  
-          ) => (
+        <FlatList
+          data={recipes}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
             <View style={styles.recipee}>
               <Image source={{ uri: item.recipe.image }} style={styles.image} />
               <View style={styles.textContainer}>
@@ -161,14 +156,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   searchInput: {
-    color: "white",
+    color: "#121212",
     width: "70%",
     marginLeft: "auto",
     marginRight: "auto",
     padding: 7,
     borderRadius: 7,
     borderWidth: 1,
-    backgroundColor: "black",
+    backgroundColor: "white",
   },
   recipeTitle: {
     marginTop: 11,

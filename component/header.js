@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-export default function Header({ navigation }) {  
+export default function Header({ navigation }) {
   return (
     <View style={styles.FoodEve}>
       <Text style={styles.title}>
@@ -9,7 +9,6 @@ export default function Header({ navigation }) {
         <Text style={styles.zone}>Zone</Text>
       </Text>
       <View style={styles.linksContainer}>
-        {/* Removed the empty TouchableOpacity or added text */}
         <TouchableOpacity onPress={() => navigation.about("About")}>
           <Text style={styles.link}>About</Text>
         </TouchableOpacity>

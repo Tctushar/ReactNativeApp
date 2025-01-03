@@ -20,13 +20,12 @@ const NewsSlider = () => {
         );
         const data = await response.json();
         setNews(data.meals || []);
-      }catch (error) {
+      } catch (error) {
         console.error("Error fetching news:", error);
       }
     };
     fetchNews();
   }, []);
-
   const renderItem = ({ item }) => (
     <View style={styles.slide}>
       {item.strMealThumb && (
@@ -39,6 +38,7 @@ const NewsSlider = () => {
         }}
       >
         <Text style={styles.link}>View Recipe</Text>
+        <Text style={styles.newSlide}>Slide for more</Text>
       </TouchableOpacity>
     </View>
   );
@@ -61,6 +61,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: 250,
   },
+  newSlide: {
+    textAlign: "center",
+    fontSize: 15,
+    marginTop: 7,
+    color: "#8252d1",
+    fontWeight: "500",
+  },
   slide: {
     width: width * 0.8,
     marginHorizontal: width * 0.1,
@@ -79,13 +86,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#eb6613",
-    marginVertical: 10,
+    marginVertical: 7,
     textAlign: "center",
   },
   link: {
     fontSize: 16,
     color: "#cc2557",
     textDecorationLine: "underline",
+    textAlign: "center",
   },
 });
 
